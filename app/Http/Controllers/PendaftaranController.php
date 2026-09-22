@@ -2,39 +2,53 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Admin;
+use App\Models\Pendaftaran;
+use App\Models\Event;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 
-class ProfilController extends Controller
+class PendaftaranController extends Controller
 {
     public function index()
     {
-        $user = Admin::findOrFail(session('admin_id'));
-        return view('admin.profil.index', compact('user'));
+        $pendaftarans = Pendaftaran::with('event')->latest()->get();
+        return view('admin.pendaftaran.index', compact('pendaftarans'));
     }
 
-    public function update(Request $request)
+    public function showForm($id)
     {
-        $admin = Admin::findOrFail(session('admin_id'));
+        $eventId = decrypt($id);
+        $event = Event::findOrFail($eventId);
+        return view('fans.pendaftaran', compact('event'));
+    }
 
+    public function store(Request $request)
+    {
         $request->validate([
+            'event_id' => 'required',
             'nama'     => 'required|string|max:255',
-            'email'    => 'required|email|unique:admins,email,' . $admin->id,
-            'password' => 'nullable|min:6',
+            'email'    => 'required|email|max:255',
+            'no_hp'    => 'required|string|max:20',
+            'alamat'   => 'required|string',
         ]);
 
-        $admin->nama = $request->nama;
-        $admin->email = $request->email;
+        $eventId = decrypt($request->event_id);
 
-        if ($request->filled('password')) {
-            $admin->password = Hash::make($request->password);
-        }
+        Pendaftaran::create([
+            'event_id' => $eventId,
+            'nama'     => $request->nama,
+            'email'    => $request->email,
+            'no_hp'    => $request->no_hp,
+            'alamat'   => $request->alamat,
+        ]);
 
-        $admin->save();
+        return redirect()->route('fans.index')->with('success', 'Pendaftaran berhasil! Sampai jumpa di event.');
+    }
 
-        session(['admin_nama' => $admin->nama]);
+    public function destroy($id)
+    {
+        $pendaftaran = Pendaftaran::findOrFail($id);
+        $pendaftaran->delete();
 
-        return redirect()->back()->with('success', 'Profil berhasil diperbarui!');
+        return redirect()->route('admin.pendaftaran.index')->with('success', 'Data pendaftaran berhasil dihapus.');
     }
 }

@@ -29,10 +29,10 @@ class EventController extends Controller
     {
         $request->validate([
             'nama_event' => 'required|string|max:255',
-            'deskripsi'  => 'required',
-            'tanggal'    => 'required|date',
-            'lokasi'     => 'required|string',
-            'kuota'      => 'required|integer|min:1',
+            'deskripsi' => 'required',
+            'tanggal' => 'required|date',
+            'lokasi' => 'required|string',
+            'kuota' => 'required|integer|min:1',
         ]);
 
         Event::create($request->all());
@@ -46,10 +46,10 @@ class EventController extends Controller
 
         $request->validate([
             'nama_event' => 'required|string|max:255',
-            'deskripsi'  => 'required',
-            'tanggal'    => 'required|date',
-            'lokasi'     => 'required|string',
-            'kuota'      => 'required|integer',
+            'deskripsi' => 'required',
+            'tanggal' => 'required|date',
+            'lokasi' => 'required|string',
+            'kuota' => 'required|integer',
         ]);
 
         $event->update($request->all());

@@ -40,24 +40,24 @@
         <div class="card-body p-4">
             <h5 class="font-weight-bold text-gray-800 mb-4">Pendaftar Terbaru</h5>
             <div class="table-responsive">
-                <table class="table table-borderless align-items-center">
-                    <thead style="background-color: #f8f9fc;">
+                <table class="table table-bordered table-striped align-items-center">
+                    <thead class="thead-light">
                         <tr>
-                            <th class="text-muted font-weight-bold">Nama</th>
-                            <th class="text-muted font-weight-bold">Event</th>
-                            <th class="text-muted font-weight-bold">Tanggal Daftar</th>
+                            <th class="font-weight-bold">Nama</th>
+                            <th class="font-weight-bold">Event</th>
+                            <th class="font-weight-bold">Tanggal Daftar</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse($pendaftarTerbaru as $item)
-                            <tr class="border-bottom">
-                                <td class="align-middle py-3">{{ $item->nama }}</td>
-                                <td class="align-middle py-3">{{ $item->event->nama_event ?? '-' }}</td>
-                                <td class="align-middle py-3">{{ $item->created_at->format('d M Y') }}</td>
+                            <tr>
+                                <td class="align-middle">{{ $item->nama }}</td>
+                                <td class="align-middle">{{ $item->event->nama_event ?? '-' }}</td>
+                                <td class="align-middle">{{ $item->created_at->format('d M Y') }}</td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="3" class="text-center py-3 text-muted">Belum ada pendaftar terbaru.</td>
+                                <td colspan="3" class="text-center py-4 text-muted">Belum ada pendaftar terbaru.</td>
                             </tr>
                         @endforelse
                     </tbody>
