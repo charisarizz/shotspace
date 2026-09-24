@@ -37,12 +37,6 @@
         </a>
     </li>
 
-    <li class="nav-item {{ Request::is('profil*') ? 'active' : '' }}">
-        <a class="nav-link" href="{{ route('admin.profil.index') }}">
-            <i class="fas fa-fw fa-user"></i>
-            <span>Profil</span>
-        </a>
-    </li>
 
     <hr class="sidebar-divider d-none d-md-block">
 

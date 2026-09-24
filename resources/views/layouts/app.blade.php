@@ -18,30 +18,30 @@
         rel="stylesheet">
 
     <link href="https://cdn.jsdelivr.net/npm/startbootstrap-sb-admin-2@4.1.4/css/sb-admin-2.min.css" rel="stylesheet">
-<style>
-    .bg-gradient-primary {
-        background-color: #6b8ea8 !important;
-        background-image: linear-gradient(180deg, #6b8ea8 10%, #4f6e85 100%) !important;
-        background-size: cover !important;
-    }
+    <style>
+        .bg-gradient-primary {
+            background-color: #6b8ea8 !important;
+            background-image: linear-gradient(180deg, #6b8ea8 10%, #4f6e85 100%) !important;
+            background-size: cover !important;
+        }
 
-    .sidebar-dark .nav-item.active .nav-link,
-    .sidebar-dark .nav-item .nav-link:hover {
-        color: #fff !important;
-        background-color: rgba(255, 255, 255, 0.15);
-        border-radius: 8px;
-    }
+        .sidebar-dark .nav-item.active .nav-link,
+        .sidebar-dark .nav-item .nav-link:hover {
+            color: #fff !important;
+            background-color: rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+        }
 
-    .btn-primary {
-        background-color: #4f6e85 !important;
-        border-color: #4f6e85 !important;
-    }
+        .btn-primary {
+            background-color: #4f6e85 !important;
+            border-color: #4f6e85 !important;
+        }
 
-    .btn-primary:hover {
-        background-color: #3e576a !important;
-        border-color: #3e576a !important;
-    }
-</style>
+        .btn-primary:hover {
+            background-color: #3e576a !important;
+            border-color: #3e576a !important;
+        }
+    </style>
     @stack('styles')
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -105,6 +105,17 @@
                 icon: 'success',
                 title: 'Berhasil',
                 text: '{{ Session::get('success') }}',
+                timer: 3000,
+                showConfirmButton: false,
+                timerProgressBar: true
+            });
+        @endif
+
+        @if (Session::has('error'))
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal',
+                text: '{{ Session::get('error') }}',
                 timer: 3000,
                 showConfirmButton: false,
                 timerProgressBar: true
