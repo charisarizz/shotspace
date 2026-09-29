@@ -30,7 +30,7 @@ class AuthController extends Controller
 
         session(['admin_id' => $admin->id, 'admin_nama' => $admin->nama]);
 
-        return redirect()->route('dashboard');
+        return redirect()->route('admin.dashboard');
     }
 
     public function logout(Request $request)
