@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('pendaftarans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('shottie_id')->constrained('shotties')->onDelete('cascade');
             $table->foreignId('event_id')->constrained('events')->onDelete('cascade');
-            $table->date('tanggal_daftar');
-            $table->string('status');
+            $table->foreignId('shottie_id')->nullable()->constrained('users')->onDelete('cascade');
+            $table->string('nama');
+            $table->string('email');
+            $table->string('no_hp');
+            $table->text('alamat');
             $table->timestamps();
         });
     }

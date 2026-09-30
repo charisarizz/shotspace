@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.fans')
 
 @section('title', 'Tentang LNGSHOT')
 
@@ -18,7 +18,7 @@
     <div class="row">
         @php
             $members = [
-                ['nama' => 'Ohyul', 'role' => 'Idol', 'foto' => 'o-hyul.jpg'],
+                ['nama' => 'Ohyul', 'role' => 'Idol', 'foto' => 'ohyul.jpg'],
                 ['nama' => 'Ryul', 'role' => 'Idol', 'foto' => 'ryul.jpg'],
                 ['nama' => 'Woojin', 'role' => 'Idol', 'foto' => 'woojin.jpg'],
                 ['nama' => 'Louis', 'role' => 'Idol', 'foto' => 'louis.jpg'],

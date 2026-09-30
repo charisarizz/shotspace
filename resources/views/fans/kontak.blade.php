@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.fans')
 
 @section('title', 'Kontak Panitia ShotSpace')
 

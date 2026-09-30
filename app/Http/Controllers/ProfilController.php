@@ -24,8 +24,8 @@ class ProfilController extends Controller
         $user = Admin::findOrFail(session('admin_id'));
 
         $request->validate([
-            'nama'     => 'required|string|max:255',
-            'email'    => 'required|email|unique:admins,email,' . $user->id,
+            'nama' => 'required|string|max:255',
+            'email' => 'required|email|unique:admins,email,' . $user->id,
             'password' => 'nullable|min:6',
         ]);
 

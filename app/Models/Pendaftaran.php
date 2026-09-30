@@ -2,24 +2,26 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Pendaftaran extends Model
 {
-    protected $fillable = [
-        'shottie_id',
-        'event_id',
-        'tanggal_daftar',
-        'status',
-    ];
+    use HasFactory;
 
-    public function shottie()
-    {
-        return $this->belongsTo(Shottie::class);
-    }
+    protected $table = 'pendaftarans';
+
+    protected $fillable = [
+        'event_id',
+        'shottie_id',
+        'nama',
+        'email',
+        'no_hp',
+        'alamat',
+    ];
 
     public function event()
     {
-        return $this->belongsTo(Event::class);
+        return $this->belongsTo(Event::class, 'event_id');
     }
 }

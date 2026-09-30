@@ -15,7 +15,13 @@ class EventController extends Controller
 
     public function showFans($id)
     {
-        $event = Event::findOrFail($id);
+        try {
+            $eventId = decrypt($id);
+        } catch (\Exception $e) {
+            $eventId = $id; 
+        }
+
+        $event = Event::findOrFail($eventId);
         return view('fans.detail', compact('event'));
     }
 

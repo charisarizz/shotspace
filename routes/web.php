@@ -8,7 +8,7 @@ use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfilController;
 
-// HALAMAN FANS (PUBLIC / SHOTTIES)
+// HALAMAN FANS
 Route::get('/', [EventController::class, 'indexFans'])->name('fans.index');
 Route::get('/event/{id}', [EventController::class, 'showFans'])->name('fans.detail');
 Route::get('/event/{id}/daftar', [PendaftaranController::class, 'showForm'])->name('fans.pendaftaran');
@@ -24,7 +24,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
-// ADMIN PANEL (DILINDUNGI SESSION ADMIN)
+// ADMIN PANEL
 Route::middleware(['admin.session'])->as('admin.')->group(function () {
 
     // Dashboard
@@ -44,6 +44,7 @@ Route::middleware(['admin.session'])->as('admin.')->group(function () {
     Route::get('/admin/users', [AdminController::class, 'index'])->name('kelola_admin.index');
     Route::post('/admin/users', [AdminController::class, 'store'])->name('kelola_admin.store');
     Route::delete('/admin/users/{id}', [AdminController::class, 'destroy'])->name('kelola_admin.destroy');
+
     // Profil Admin
     Route::get('/profil', [ProfilController::class, 'index'])->name('profil.index');
     Route::put('/profil', [ProfilController::class, 'update'])->name('profil.update');

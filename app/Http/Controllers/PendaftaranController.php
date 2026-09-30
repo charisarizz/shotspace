@@ -16,7 +16,12 @@ class PendaftaranController extends Controller
 
     public function showForm($id)
     {
-        $eventId = decrypt($id);
+        try {
+            $eventId = decrypt($id);
+        } catch (\Exception $e) {
+            $eventId = $id;
+        }
+
         $event = Event::findOrFail($eventId);
         return view('fans.pendaftaran', compact('event'));
     }
@@ -25,20 +30,24 @@ class PendaftaranController extends Controller
     {
         $request->validate([
             'event_id' => 'required',
-            'nama'     => 'required|string|max:255',
-            'email'    => 'required|email|max:255',
-            'no_hp'    => 'required|string|max:20',
-            'alamat'   => 'required|string',
+            'nama' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'no_hp' => 'required|string|max:20',
+            'alamat' => 'required|string',
         ]);
 
-        $eventId = decrypt($request->event_id);
+        try {
+            $eventId = decrypt($request->event_id);
+        } catch (\Exception $e) {
+            $eventId = $request->event_id;
+        }
 
         Pendaftaran::create([
             'event_id' => $eventId,
-            'nama'     => $request->nama,
-            'email'    => $request->email,
-            'no_hp'    => $request->no_hp,
-            'alamat'   => $request->alamat,
+            'nama' => $request->nama,
+            'email' => $request->email,
+            'no_hp' => $request->no_hp,
+            'alamat' => $request->alamat,
         ]);
 
         return redirect()->route('fans.index')->with('success', 'Pendaftaran berhasil! Sampai jumpa di event.');
